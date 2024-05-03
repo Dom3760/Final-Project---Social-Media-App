@@ -18,6 +18,8 @@
 		33B52AD52BD823AB002CC244 /* signUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B52AD42BD823AB002CC244 /* signUpPage.swift */; };
 		33B52AD72BD823BF002CC244 /* signInPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B52AD62BD823BF002CC244 /* signInPage.swift */; };
 		33B52AD92BD823DF002CC244 /* settingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B52AD82BD823DF002CC244 /* settingsPage.swift */; };
+		33EFE7AE2BDAC09D0000B899 /* postView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EFE7AD2BDAC09D0000B899 /* postView.swift */; };
+		33EFE7B02BDAC9190000B899 /* newPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EFE7AF2BDAC9190000B899 /* newPostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		33B52AD42BD823AB002CC244 /* signUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpPage.swift; sourceTree = "<group>"; };
 		33B52AD62BD823BF002CC244 /* signInPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInPage.swift; sourceTree = "<group>"; };
 		33B52AD82BD823DF002CC244 /* settingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsPage.swift; sourceTree = "<group>"; };
+		33EFE7AD2BDAC09D0000B899 /* postView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postView.swift; sourceTree = "<group>"; };
+		33EFE7AF2BDAC9190000B899 /* newPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newPostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 			children = (
 				33B52AA82BD8066E002CC244 /* Social_Media_AppApp.swift */,
 				33B52AAA2BD8066E002CC244 /* ContentView.swift */,
+				33EFE7AF2BDAC9190000B899 /* newPostView.swift */,
+				33EFE7AD2BDAC09D0000B899 /* postView.swift */,
 				33B52AD22BD82390002CC244 /* accountPage.swift */,
 				33B52AD42BD823AB002CC244 /* signUpPage.swift */,
 				33B52AD62BD823BF002CC244 /* signInPage.swift */,
@@ -270,11 +276,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B52AD32BD82390002CC244 /* accountPage.swift in Sources */,
+				33EFE7AE2BDAC09D0000B899 /* postView.swift in Sources */,
 				33B52AAB2BD8066E002CC244 /* ContentView.swift in Sources */,
 				33B52AD52BD823AB002CC244 /* signUpPage.swift in Sources */,
 				33B52AD92BD823DF002CC244 /* settingsPage.swift in Sources */,
 				33B52AA92BD8066E002CC244 /* Social_Media_AppApp.swift in Sources */,
 				33B52AD72BD823BF002CC244 /* signInPage.swift in Sources */,
+				33EFE7B02BDAC9190000B899 /* newPostView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

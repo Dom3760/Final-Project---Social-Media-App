@@ -9,7 +9,9 @@ import SwiftUI
 
 struct settingsPage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("settings")
+            .padding()
+//        TextField(text: <#T##Binding<String>#>, label: <#T##() -> View#>)
     }
 }
 
