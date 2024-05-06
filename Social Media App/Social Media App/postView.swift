@@ -9,11 +9,9 @@ import SwiftUI
 
 struct postView: View {
     @State var post: Post
+    @State var dark: Bool
 
     var body: some View {
-//        @environmentObject()
-//        @State var posts: [Post] = []
-//        ForEach(posts, id: \.self){ post in
             VStack(alignment: .leading)
             {
                 HStack
@@ -24,15 +22,20 @@ struct postView: View {
                 }
                 Text(post.title)
                     .fontWeight(.bold)
+                    .padding(.bottom, 5)
                 Text(post.body)
             }
-            .frame(width: 350, min-height: 150)
-            .cornerRadius(3.0)
-            .border(Color.black)
-//        }
+            .foregroundColor(dark ? .white : .black)
+            .padding()
+            .frame(minHeight: 150 , maxHeight: 300)
+            .frame(width: 350)
+            .background(dark ? .black : .white)
+            .cornerRadius(10.0)
+            .shadow(radius: 5)
+//            .border(Color.black)
     }
 }
 
 #Preview {
-    postView(post: Post(username: "example", title: "there are rats", body: "there are rats in the celing"))
+    postView(post: Post(username: "example", title: "there are rats", body: "there are rats in the celing"), dark: false)
 }

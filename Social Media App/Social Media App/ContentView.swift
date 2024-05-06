@@ -65,22 +65,23 @@ struct ContentView: View {
                                 .padding()
                         }
                         .foregroundColor(dark ? .white : .black)
-                        
-                           
-                        
                     }
-                    .frame(width: 400, height: 45, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .padding()
-                    .position(x: 200.0, y: -20)
-                    List
+                    .ignoresSafeArea()
+                    ScrollView
                     {
-    //                    ForEach(, id: \.self) { note in
-    //                            newPostView()
-    //                    }
-    //                    .padding(.top)
-    //                    .frame(width: 400, height: 700, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        VStack(spacing:30)
+                        {
+                            ForEach(posts, id: \.self) { post in
+                                postView(post: post, dark: self.dark)
+                            }
+                            .background(dark ? .black : .white)
+                        }
+                        .frame(width: 400)
+                        .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                     }
+                    .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                     .foregroundColor(dark ? .white : .black)
+//                    .position(x: 200.0, y: -20)
                     HStack
                     {
     //                    NavigationLink(destination: accountPage()){
@@ -111,7 +112,7 @@ struct ContentView: View {
                     }
                     .foregroundColor(dark ? .white : .black)
                     .frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    //            .position(x: 200, y:384)
+//                    .position(x: 200, y:384)
                 }
                 if shown
                 {
