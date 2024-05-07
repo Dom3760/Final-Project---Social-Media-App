@@ -28,7 +28,7 @@ struct ContentView: View {
     @State private var dark = false
     @State private var signedIn = false
     
-    var userdata: [Users] = [
+    var userData: [Users] = [
         Users(email: "DanielCarson@gmail.com", username: "DanielC408", password: "DanSecure320!", phonenum: "408-838-7828", name: "Daniel"),
         Users(email: "BO3Boss@gmail.com", username: "Bo4Gamer67", password: "CodIsLife3989", phonenum: "408-738-8939", name: "Josh"),
         Users(email: "StringCheese@gmail.com", username: "FoodGoblin", password: "CheeseBurger4353", phonenum: "408-393-7383", name: "Bob"),
@@ -59,7 +59,7 @@ struct ContentView: View {
                         })
                         Spacer()
                             .frame(width: 250, height: 1)
-                        NavigationLink(destination: signedIn ? AnyView(accountPage()) : AnyView(signInPage())) {
+                        NavigationLink(destination: signedIn ? AnyView(accountPage()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
                             Image(systemName: "person.crop.circle")
                                 .font(.system(size: 25))
                                 .padding()
@@ -81,15 +81,8 @@ struct ContentView: View {
                     }
                     .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                     .foregroundColor(dark ? .white : .black)
-//                    .position(x: 200.0, y: -20)
                     HStack
                     {
-    //                    NavigationLink(destination: accountPage()){
-    //                        Image(systemName: "person.crop.circle")
-    //                            .font(.system(size: 25))
-    //                            .padding()
-    //                    }
-    //                    .foregroundColor(.black)
                         NavigationLink (destination: ContentView(),label: {
                             Image(systemName: "house")
                                 .foregroundColor(dark ? .white : .black)
@@ -97,14 +90,14 @@ struct ContentView: View {
                                 .frame(width: 120, height:50)
                         })
                         .foregroundColor(.black)
-                        NavigationLink(destination: signedIn ? AnyView(newPostView()) : AnyView(signInPage())) {
+                        NavigationLink(destination: signedIn ? AnyView(newPostView()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
                             Image(systemName: "plus")
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 25))
                                 .frame(width: 120, height:50)
                         }
                         .foregroundColor(.black)
-                        NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage())) {
+                        NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
                             Image(systemName: "gear")
                                 .font(.system(size: 25))
                                 .frame(width: 120, height:50)
@@ -112,7 +105,6 @@ struct ContentView: View {
                     }
                     .foregroundColor(dark ? .white : .black)
                     .frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                    .position(x: 200, y:384)
                 }
                 if shown
                 {
@@ -131,7 +123,6 @@ struct ContentView: View {
                             .padding()
                             .position(x: 45, y: -20)
                         }
-//                        Spacer()
                         VStack(alignment: .leading) {
                             NavigationLink (destination: ContentView(),label: {
                                 HStack {
@@ -142,7 +133,7 @@ struct ContentView: View {
                                 .font(.system(size: 25))
                             })
                             .padding()
-                            NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage())) {
+                            NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
                                 HStack {
                                     Text("Settings")
                                     Image(systemName: "gear")
@@ -152,7 +143,7 @@ struct ContentView: View {
                                 
                             }
                             .padding()
-                            NavigationLink(destination: signInPage()) {
+                            NavigationLink(destination: signInPage(signedIn: $signedIn, accounts: userData)) {
                                 Text("Sign In")
                             }
                             .padding()
@@ -171,7 +162,7 @@ struct ContentView: View {
                             .frame(width: 100, height: 300)
                         HStack
                         {
-                            NavigationLink(destination: signedIn ? AnyView(accountPage()) : AnyView(signInPage())){
+                            NavigationLink(destination: signedIn ? AnyView(accountPage()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))){
                                 HStack {
                                     if signedIn {
                                         Text("Account")
