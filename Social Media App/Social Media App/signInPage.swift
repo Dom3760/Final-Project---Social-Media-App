@@ -23,7 +23,8 @@ struct signInPage: View {
             ZStack
             {
                 Rectangle()
-                
+                    .fill(LinearGradient(gradient: Gradient(colors: [.purple, .orange]), startPoint: .top, endPoint: .bottom))
+//                    .frame()
                 Rectangle()
                     .border(Color.black)
                     .foregroundColor(.white)
@@ -66,6 +67,10 @@ struct signInPage: View {
                 signedIn = true
                 alertMessage = "Sign in successful!"
                 showingAlert = true
+                accountIn = Username
+//                NavigationLink(destination: ContentView(accountIn: $accountIn), isActive: $signedIn) {
+//                    EmptyView()
+//                }
 
             }
         }

@@ -90,7 +90,7 @@ struct ContentView: View {
                                 .frame(width: 120, height:50)
                         })
                         .foregroundColor(.black)
-                        NavigationLink(destination: signedIn ? AnyView(newPostView()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
+                        NavigationLink(destination: signedIn ? AnyView(newPostView(postArray: posts)) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
                             Image(systemName: "plus")
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 25))

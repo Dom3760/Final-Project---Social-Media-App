@@ -8,38 +8,52 @@
 import SwiftUI
 
 struct newPostView: View {
-    @State var Title1: String = ""
-    @State var Body1: String = ""
+    @State var title1: String = ""
+    @State var body1: String = ""
+    @State var postArray: [Post]
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                // fills with a color, gives a color
-                .fill(Color(red: 240/255, green: 240/255, blue: 240/255))
-                .frame(height: 80)
-            // makes a text field that will store the title when add item is clicked.
-            TextField("Title", text: $Title1)
-                // rounded text box style and padding
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-        }
-        // zstack that will put the large text box inside of the rectangle.
-        ZStack{
-            // makes a rectangle
-            Rectangle()
-                // fills with gray
-                .fill(Color(red: 240/255, green: 240/255, blue: 240/255))
-            // text that will be saved into the array when add item is pushed,
-            TextEditor(text: $Body1)
-                // adds a height, alignment, rounded style, and padding to the text box
-                .frame(height: 500, alignment: .center)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
+        NavigationView()
+        {
+            VStack
+            {
+                ZStack {
+                    Rectangle()
+                    // fills with a color, gives a color
+                        .fill(Color(red: 240/255, green: 240/255, blue: 240/255))
+                        .frame(height: 80)
+                    // makes a text field that will store the title when add item is clicked.
+                    TextField("Title", text: $title1)
+                    // rounded text box style and padding
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                }
+                ZStack
+                {
+                    Rectangle()
+                        .fill(Color(red: 240/255, green: 240/255, blue: 240/255))
+                    TextEditor(text: $body1)
+                        .frame(/*width: 350,*/ height: 400)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                }
+                NavigationLink(destination: ContentView()) {
+                    Text("Add post")
+                        .padding()
+                        .frame(width: 300)
+                        .background(Color.blue)
+                        .foregroundColor(.black)
+                        .cornerRadius(3.0)
+                }
+                .onTapGesture {
+                    let newPost = Post(username: "", title: title1, body: body1)
+                    postArray.append(newPost)
+                }
+            }
         }
     }
 }
 
 #Preview {
-    newPostView()
+    newPostView(postArray: [])
 }
