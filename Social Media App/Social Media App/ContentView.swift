@@ -131,6 +131,7 @@ struct ContentView: View {
                                 }
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 25))
+                                .fontWeight(.bold)
                             })
                             .padding()
                             NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, accounts: userData))) {
