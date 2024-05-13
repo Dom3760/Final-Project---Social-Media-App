@@ -99,5 +99,5 @@ struct accountPage: View {
 }
 
 #Preview {
-    accountPage(accountIn: "", posts: [Post], dark: false)
+    accountPage(accountIn: "", posts: [], dark: false)
 }

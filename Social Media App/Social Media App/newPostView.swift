@@ -10,7 +10,10 @@ import SwiftUI
 struct newPostView: View {
     @State var title1: String = ""
     @State var body1: String = ""
-    @State var postArray: [Post]
+    @Binding var postArray: [Post]
+    @State var acc: String
+    
+    @State private var pushed = false
 
     var body: some View {
         NavigationView()
@@ -37,23 +40,31 @@ struct newPostView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                 }
-                NavigationLink(destination: ContentView()) {
+                Button(action: addPost, label: {
                     Text("Add post")
                         .padding()
                         .frame(width: 300)
                         .background(Color.blue)
                         .foregroundColor(.black)
                         .cornerRadius(3.0)
-                }
-                .onTapGesture {
-                    let newPost = Post(username: "", title: title1, body: body1)
-                    postArray.append(newPost)
+                })
+                NavigationLink(destination: ContentView(accountIn:""), isActive: $pushed)
+                {
+                    EmptyView()
                 }
             }
         }
     }
+    func addPost()
+    {
+        let newPost = Post(username: acc, title: title1, body: body1)
+        print(postArray)
+        postArray.append(newPost)
+        print(postArray)
+        pushed = true
+    }
 }
 
 #Preview {
-    newPostView(postArray: [])
+    newPostView(postArray: .constant([]), acc: "")
 }
