@@ -22,6 +22,13 @@ struct Post: Hashable {
     var body: String
 }
 
+struct accInfo{
+    var username: String
+    var bio: String
+    var pronouns: String
+    var stateCountry: String
+}
+
 struct ContentView: View {
     
     @State private var shown = false
@@ -43,151 +50,161 @@ struct ContentView: View {
         Post(username: "BlueCheese830", title: "I can eat Blue Cheese anywhere", body: "I can eat blue cheese with anyone, on anything. anywhere. It is the best thing ever, I swear.")
     ]
     
+    @State private var accInfo1 = [
+        accInfo(username: "DanielC408", bio: "whats up? I am Daniel Carson. I love listening to music.", pronouns: "He/Him", stateCountry: "CA/USA"),
+        accInfo(username: "Bo4Gamer67", bio: "I love COD in general, but my favorite is BO4!", pronouns: "He/Him", stateCountry: "CA/USA"),
+        accInfo(username: "FoodGoblin", bio: "I am a Self-proclaimed food enthusist", pronouns: "String/Cheese", stateCountry: "CA/USA"),
+        accInfo(username: "BlueCheese830", bio: "I am in love with blue cheese. I would litterly marry it", pronouns: "He/Him", stateCountry: "CA/USA")
+    ]
+    
     var body: some View {
-        
-        NavigationView
+        TabView
         {
-            ZStack {
-                VStack
-                {
-                    HStack
-                    {
-                        Button(action: menu, label: {
-                            Image(systemName: "list.bullet")
-                                .foregroundColor(dark ? .white : .black)
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                        })
-                        Spacer()
-                            .frame(width: 250, height: 1)
-                        NavigationLink(destination: signedIn ? AnyView(accountPage(accountIn: accountIn, posts: posts, dark: dark)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                            Image(systemName: "person.crop.circle")
-                                .font(.system(size: 25))
-                                .padding()
-                        }
-                        .foregroundColor(dark ? .white : .black)
-                    }
-                    .ignoresSafeArea()
-                    ScrollView
-                    {
-                        VStack(spacing:30)
-                        {
-                            ForEach(posts, id: \.self) { post in
-                                postView(post: post, dark: self.dark)
-                            }
-                            .background(dark ? .black : .white)
-                        }
-                        .frame(width: 400)
-                        .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    }
-                    .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(dark ? .white : .black)
-                    HStack
-                    {
-                        NavigationLink (destination: ContentView(),label: {
-                            Image(systemName: "house")
-                                .foregroundColor(dark ? .white : .black)
-                                .font(.system(size: 25))
-                                .frame(width: 120, height:50)
-                        })
-                        .foregroundColor(.black)
-                        NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                                Image(systemName: "plus")
-                                .foregroundColor(dark ? .white : .black)
-                                .font(.system(size: 25))
-                                .frame(width: 120, height:50)
-                        }
-                        .foregroundColor(.black)
-                        NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                            Image(systemName: "gear")
-                                .font(.system(size: 25))
-                                .frame(width: 120, height:50)
-                        }
-                    }
-                    .foregroundColor(dark ? .white : .black)
-                    .frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                }
-                if shown
-                {
-                    Rectangle()
-                        .foregroundColor(dark ? .black : .white)
-                        .opacity(1)
-                        .edgesIgnoringSafeArea(.all)
+        NavigationView
+            {
+                ZStack {
                     VStack
                     {
-                        HStack {
+                        HStack
+                        {
                             Button(action: menu, label: {
                                 Image(systemName: "list.bullet")
-                                    .font(.system(size: 25))
                                     .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
                             })
-                            .padding()
-                            .position(x: 45, y: -20)
+                            Spacer()
+                                .frame(width: 250, height: 1)
+                            NavigationLink(destination: signedIn ? AnyView(accountPage() : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                Image(systemName: "gear")
+                                    .font(.system(size: 25))
+                                    .frame(width: 120, height:50)
+                            }
+                            .foregroundColor(dark ? .white : .black)
                         }
-                        VStack(alignment: .leading) {
-                            NavigationLink (destination: ContentView(),label: {
-                                HStack {
-                                    Text("Home")
-                                    Image(systemName: "house")
+                        .ignoresSafeArea()
+                        ScrollView
+                        {
+                            VStack(spacing:30)
+                            {
+                                ForEach(posts, id: \.self) { post in
+                                    postView(post: post, dark: self.dark)
                                 }
+                                .background(dark ? .black : .white)
+                            }
+                            .frame(width: 400)
+                            .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                        }
+                        .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(dark ? .white : .black)
+//                        .frame(height: 700)
+                        HStack
+                        {
+                            NavigationLink (destination: ContentView(),label: {
+                                Image(systemName: "house")
+                                    .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 25))
+                                    .frame(width: 120, height:50)
+                            })
+                            .foregroundColor(.black)
+                            NavigationLink(destination: signedIn ? AnyView(newPostView(postArray: $posts, acc: accountIn)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                Image(systemName: "plus")
+                                    .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 25))
+                                    .frame(width: 120, height:50)
+                            }
+                            .foregroundColor(.black)
+                            NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo: $accInfo1)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                Image(systemName: "gear")
+                                    .font(.system(size: 25))
+                                    .frame(width: 120, height:50)
+                            }
+                        }
+                        .foregroundColor(dark ? .white : .black)
+                        .frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .ignoresSafeArea()
+                    }
+                    if shown
+                    {
+                        Rectangle()
+                            .foregroundColor(dark ? .black : .white)
+                            .opacity(1)
+                            .edgesIgnoringSafeArea(.all)
+                        VStack
+                        {
+                            HStack {
+                                Button(action: menu, label: {
+                                    Image(systemName: "list.bullet")
+                                        .font(.system(size: 25))
+                                        .foregroundColor(dark ? .white : .black)
+                                })
+                                .padding()
+                                .position(x: 45, y: -20)
+                            }
+                            VStack(alignment: .leading) {
+                                NavigationLink (destination: ContentView(),label: {
+                                    HStack {
+                                        Text("Home")
+                                        Image(systemName: "house")
+                                    }
+                                    .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                })
+                                .padding()
+                                NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo: $accInfo1)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                    HStack {
+                                        Text("Settings")
+                                        Image(systemName: "gear")
+                                    }
+                                    .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 25))
+                                    
+                                }
+                                .padding()
+                                NavigationLink(destination: AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                    Text("Sign In")
+                                }
+                                .padding()
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 25))
-                                .fontWeight(.bold)
-                            })
-                            .padding()
-                            NavigationLink(destination: signedIn ? AnyView(settingsPage()) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                                HStack {
-                                    Text("Settings")
-                                    Image(systemName: "gear")
+                                NavigationLink(destination: signUpPage(accInfo: $userData)) {
+                                    Text("Sign Up")
                                 }
+                                .padding()
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 25))
                                 
                             }
-                            .padding()
-                            NavigationLink(destination: AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                                Text("Sign In")
-                            }
-                            .padding()
-                            .foregroundColor(dark ? .white : .black)
-                            .font(.system(size: 25))
-                            NavigationLink(destination: signUpPage()) {
-                                Text("Sign Up")
-                            }
-                            .padding()
-                            .foregroundColor(dark ? .white : .black)
-                            .font(.system(size: 25))
+                            .frame(width: 400)
                             Spacer()
-                        }
-                        .frame(width: 400)
-                        Spacer()
-                            .frame(width: 100, height: 300)
-                        HStack
-                        {
-                            NavigationLink(destination: signedIn ? AnyView(accountPage(accountIn: accountIn, posts: posts, dark: dark)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                                HStack {
-                                    if signedIn {
-                                        Text(accountIn)
+                                .frame(width: 100, height: 300)
+                            HStack
+                            {
+                                NavigationLink(destination: signedIn ? AnyView(accountPage(accInfo1: accInfo1, accountIn: accountIn, posts: posts, dark: dark)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {        HStack {
+                                        if signedIn {
+                                            Text(accountIn)
+                                        }
+                                        else{
+                                            Text("Sign In")
+                                        }
+                                        Image(systemName: "person.crop.circle")
                                     }
-                                    else{
-                                        Text("Sign In")
-                                    }
-                                    Image(systemName: "person.crop.circle")
-                                }
                                     .font(.system(size: 25))
                                     .padding()
+                                }
+                                Toggle("Dark Mode:", isOn: $dark)
+                                    .foregroundColor(dark ? .white : .black)
+                                    .padding()
+                                    .frame(width:200)
+                                    .font(.system(size: 20))
                             }
-                            Toggle("Dark Mode:", isOn: $dark)
-                                .foregroundColor(dark ? .white : .black)
-                                .padding()
-                                .frame(width:200)
-                                .font(.system(size: 20))
+                            .foregroundColor(dark ? .white : .black)
                         }
-                        .foregroundColor(dark ? .white : .black)
                     }
                 }
+                .background(dark ? .black: .white)
             }
-            .background(dark ? .black: .white)
         }
     }
     

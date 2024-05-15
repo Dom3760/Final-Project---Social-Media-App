@@ -89,5 +89,5 @@ struct signInPage: View {
 }
 
 #Preview {
-    signInPage(signedIn:(.constant(false)) , post2:[], accountIn: $accountIn, accounts:[])
+    signInPage(signedIn:(.constant(false)) , post2:[], accountIn: .constant("hello"), accounts:[])
 }

@@ -7,21 +7,10 @@
 
 import SwiftUI
 
-struct accInfo{
-    var username: String
-    var bio: String
-    var pronouns: String
-    var stateCountry: String
-}
-
 struct accountPage: View {
    
-    var accInfo1 = [
-        accInfo(username: "DanielC408", bio: "whats up? I am Daniel Carson. I love listening to music.", pronouns: "He/Him", stateCountry: "CA/USA"),
-        accInfo(username: "Bo4Gamer67", bio: "I love COD in general, but my favorite is BO4!", pronouns: "He/Him", stateCountry: "CA/USA"),
-        accInfo(username: "FoodGoblin", bio: "I am a Self-proclaimed food enthusist", pronouns: "String/Cheese", stateCountry: "CA/USA"),
-        accInfo(username: "BlueCheese830", bio: "I am in love with blue cheese. I would litterly marry it", pronouns: "He/Him", stateCountry: "CA/USA")
-    ]
+    @State var accInfo1 : [accInfo]
+    
     @State var postB = true
     @State var picturesB = false
     @State var allB = false
@@ -99,5 +88,5 @@ struct accountPage: View {
 }
 
 #Preview {
-    accountPage(accountIn: "", posts: [], dark: false)
+    accountPage(accInfo1: [],accountIn: "", posts: [], dark: false)
 }
