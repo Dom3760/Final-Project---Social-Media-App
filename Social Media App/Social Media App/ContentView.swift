@@ -75,14 +75,16 @@ struct ContentView: View {
                             })
                             Spacer()
                                 .frame(width: 250, height: 1)
-                            NavigationLink(destination: signedIn ? AnyView(accountPage() : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
-                                Image(systemName: "gear")
+                            NavigationLink(destination: signedIn ? AnyView(accountPage(accInfo1: accInfo1, accountIn: accountIn, posts: posts, dark: dark)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                Image(systemName: "person.crop.circle")
                                     .font(.system(size: 25))
-                                    .frame(width: 120, height:50)
+//                                    .frame(width: 120, height:50)
                             }
                             .foregroundColor(dark ? .white : .black)
                         }
-                        .ignoresSafeArea()
+//                        .ignoresSafeArea()
+//                        .position(x: 225, y: 25.0)
+                        
                         ScrollView
                         {
                             VStack(spacing:30)
@@ -97,7 +99,8 @@ struct ContentView: View {
                         }
                         .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                         .foregroundColor(dark ? .white : .black)
-//                        .frame(height: 700)
+//                        .padding(.top, 100)
+//                        .frame(height: 650)
                         HStack
                         {
                             NavigationLink (destination: ContentView(),label: {
@@ -122,7 +125,9 @@ struct ContentView: View {
                         }
                         .foregroundColor(dark ? .white : .black)
                         .frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .ignoresSafeArea()
+//                        .border(.black)
+//                        .ignoresSafeArea()
+//                        .position(x: 200, y: 25)
                     }
                     if shown
                     {
@@ -138,8 +143,8 @@ struct ContentView: View {
                                         .font(.system(size: 25))
                                         .foregroundColor(dark ? .white : .black)
                                 })
-                                .padding()
-                                .position(x: 45, y: -20)
+//                                .padding()
+                                .position(x: 45)
                             }
                             VStack(alignment: .leading) {
                                 NavigationLink (destination: ContentView(),label: {
@@ -191,7 +196,7 @@ struct ContentView: View {
                                         Image(systemName: "person.crop.circle")
                                     }
                                     .font(.system(size: 25))
-                                    .padding()
+//                                    .padding()
                                 }
                                 Toggle("Dark Mode:", isOn: $dark)
                                     .foregroundColor(dark ? .white : .black)
