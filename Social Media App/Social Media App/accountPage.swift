@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct accountPage: View {
-   
-    @State var accInfo1 : [accInfo]
-    
-    @State var postB = true
-    @State var picturesB = false
-    @State var allB = false
-    @State var index = 0
-    
-    @State var accountIn: String
-    @State var posts:[Post]
+    var accInfo1: [accInfo]
+    var accountIn: String
+    var posts: [Post]
     @State var dark: Bool
+    
+    @State private var postB = true
+    @State private var picturesB = false
+    @State private var allB = false
     
     var body: some View {
         VStack {
@@ -26,18 +23,27 @@ struct accountPage: View {
                 ZStack {
                     Circle()
                         .frame(width: 100, height: 100)
-        //            Image("")
+                    // Display profile picture here
                 }
-                Text(accInfo1[index].username)
+                if let index = accInfo1.firstIndex(where: { $0.username == accountIn }) {
+                    Text(accInfo1[index].username)
+                }
             }
-            HStack
+            
+            VStack
             {
-                Text(accInfo1[index].pronouns)
-                Text(accInfo1[index].stateCountry)
+                if let index = accInfo1.firstIndex(where: { $0.username == accountIn }) {
+                    HStack {
+                        
+                        Text(accInfo1[index].pronouns)
+                        Text(accInfo1[index].stateCountry)
+                        
+                    }
+                    Text("Bio: \(accInfo1[index].bio)")
+                }
             }
-            Text("bio: \(accInfo1[index].bio)")
-            HStack
-            {
+            
+            HStack {
                 Button(action: {
                     postB = true
                     picturesB = false
@@ -71,22 +77,39 @@ struct accountPage: View {
                 .background(allB ? .blue : Color(red: 240/255, green: 240/255, blue: 240/255))
                 .foregroundColor(allB ? .white : .black)
             }
-            ScrollView
-            {
-                VStack(spacing:30)
+            
+            ScrollView {
+                VStack(spacing: 30)
                 {
-                    ForEach(posts, id: \.self) { post in
-                        postView(post: post, dark: self.dark)
+                    ForEach(posts.indices, id: \.self) { i in
+                        if posts[i].username == accountIn
+                        {
+                            postView(post: posts[i], dark: dark)
+//                                .background(self.dark ? Color.black : Color.white)
+                            }
+                        }
                     }
-                    .background(dark ? .black : .white)
                 }
-                .frame(width: 400)
-                .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             }
         }
-    }
 }
 
 #Preview {
-    accountPage(accInfo1: [],accountIn: "", posts: [], dark: false)
+    accountPage(accInfo1: [],accountIn: "", posts: [], dark: true)
 }
+
+
+
+//                VStack(spacing: 30) {
+//                    ForEach(posts, id: \.self) { post in
+//                        postView(post: post, dark: self.dark)
+//                            .background(self.dark ? Color.black : Color.white)
+//                    }
+//                }
+//                .frame(width: 400) // Adjust width as needed
+//                .border(Color.black) // Add border if necessary
+
+//                if let index = posts.firstIndex(where: $0.username == accountIn)
+//                {
+//
+//                }

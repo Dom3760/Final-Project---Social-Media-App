@@ -14,6 +14,8 @@ struct newPostView: View {
     @State var acc: String
     
     @State private var pushed = false
+    
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView()
@@ -48,10 +50,10 @@ struct newPostView: View {
                         .foregroundColor(.black)
                         .cornerRadius(3.0)
                 })
-                NavigationLink(destination: ContentView(accountIn:""), isActive: $pushed)
-                {
-                    EmptyView()
-                }
+//                NavigationLink(destination: ContentView(accountIn:""), isActive: $pushed)
+//                {
+//                    EmptyView()
+//                }
             }
         }
     }
@@ -61,7 +63,8 @@ struct newPostView: View {
         print(postArray)
         postArray.append(newPost)
         print(postArray)
-        pushed = true
+        presentationMode.wrappedValue.dismiss()
+//        pushed = true
     }
 }
 

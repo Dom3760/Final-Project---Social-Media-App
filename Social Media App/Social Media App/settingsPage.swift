@@ -55,13 +55,15 @@ struct settingsPage: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .cornerRadius(3.0)
                 
-                Button(action: {}, label: {
-                    Text("save changes")
-                })
+                Button(action: {
+                    self.updateUserInfo()
+                },
+                    label: {
+                        Text("Save changes")
+                    })
                 .padding()
-                Text("Bio:")
-                    .padding(.bottom, -16)
-                TextEditor(text: $bio)
+                .padding()
+                TextField("Bio", text: $bio)
                     .border(Color.black)
                     .frame(width:200)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -79,9 +81,12 @@ struct settingsPage: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .cornerRadius(3.0)
                     .padding()
-                Button(action: {}, label: {
-                    Text("save changes")
-                })
+                Button(action: {
+                    self.changeProfileInfo()
+                },
+                    label: {
+                        Text("Save changes")
+                    })
             }
             .padding(30)
             .shadow(radius: 10)
@@ -93,21 +98,30 @@ struct settingsPage: View {
     }
     func updateUserInfo() {
         // Find the user whose login details need to be updated
+        print("function launched")
         if let index = userData.firstIndex(where: { $0.username == accountIn }) {
             // Update the user's login details
+            print("user found in \(index) index.")
             if password != "" {
                 userData[index].password = password
+                print("info entered has been changed")
             }
             if username != "" {
                 userData[index].username = username
+                print("info entered has been changed")
             }
             if phonenum != "" {
                 userData[index].phonenum = phonenum
+                print("info entered has been changed")
             }
             if email != "" {
                 userData[index].email = email
+                print("info entered has been changed")
             }
-        } 
+            alertOn = true
+            alertmessage = "info entered has been changed"
+            print("info entered has been changed")
+        }
         else {
             alertOn = true
             alertmessage = "Please enter one change before saving"
@@ -115,27 +129,45 @@ struct settingsPage: View {
     }
     func changeProfileInfo()
     {
+        print("function 2 launched")
         if let index = accInfo1.firstIndex(where: { $0.username == accountIn})
         {
+            print("user found in \(index) index.")
             if bio != ""
             {
                 accInfo1[index].bio = bio
+                print("info entered has been changed")
             }
             if pronouns != ""
             {
                 accInfo1[index].pronouns = pronouns
+                print("info entered has been changed")
 
             }
             if stateCountry != ""
             {
                 accInfo1[index].stateCountry = stateCountry
+                print("info entered has been changed")
             }
+            alertmessage = "info entered has been changed"
+            alertOn = true
+            print("info entered has been changed")
         }
         else
         {
-            if bio.isEmpty || pronouns.isEmpty || stateCountry
-            var info = accInfo(username: username, bio: bio, pronouns: pronouns, stateCountry: stateCountry)
-            accInfo1.append(info)
+            print("nothing has been found")
+            if bio.isEmpty || pronouns.isEmpty || stateCountry.isEmpty
+            {
+                alertmessage = "please enter all of the fields"
+                alertOn = true
+            }
+            else
+            {
+                var info = accInfo(username: username, bio: bio, pronouns: pronouns, stateCountry: stateCountry)
+                accInfo1.append(info)
+                alertmessage = "info has been sucsessfully changed"
+                alertOn = true
+            }
         }
     }
 }

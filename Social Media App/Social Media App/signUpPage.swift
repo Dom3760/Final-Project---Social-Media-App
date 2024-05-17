@@ -82,6 +82,7 @@ struct signUpPage: View {
             alertMessage = "account successfully created"
             alert = true
             print(accInfo)
+            
         }
     }
 }
