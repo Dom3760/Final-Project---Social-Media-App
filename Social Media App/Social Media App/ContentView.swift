@@ -50,7 +50,7 @@ struct ContentView: View {
         Post(username: "BlueCheese830", title: "I can eat Blue Cheese anywhere", body: "I can eat blue cheese with anyone, on anything. anywhere. It is the best thing ever, I swear.")
     ]
     
-    @State private var accInfo1 = [
+    @State private var accInfo1: [accInfo] = [
         accInfo(username: "DanielC408", bio: "whats up? I am Daniel Carson. I love listening to music.", pronouns: "He/Him", stateCountry: "CA/USA"),
         accInfo(username: "Bo4Gamer67", bio: "I love COD in general, but my favorite is BO4!", pronouns: "He/Him", stateCountry: "CA/USA"),
         accInfo(username: "FoodGoblin", bio: "I am a Self-proclaimed food enthusist", pronouns: "String/Cheese", stateCountry: "CA/USA"),
@@ -117,7 +117,7 @@ struct ContentView: View {
                                     .frame(width: 120, height:50)
                             }
                             .foregroundColor(.black)
-                            NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo: $accInfo1)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                            NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo1: $accInfo1, accountIn: accountIn)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
                                 Image(systemName: "gear")
                                     .font(.system(size: 25))
                                     .frame(width: 120, height:50)
@@ -157,7 +157,7 @@ struct ContentView: View {
                                     .fontWeight(.bold)
                                 })
                                 .padding()
-                                NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo: $accInfo1)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
+                                NavigationLink(destination: signedIn ? AnyView(settingsPage(userData: $userData, accInfo1: $accInfo1, accountIn: accountIn)) : AnyView(signInPage(signedIn: $signedIn, post2: posts, accountIn: $accountIn, accounts: userData))) {
                                     HStack {
                                         Text("Settings")
                                         Image(systemName: "gear")
