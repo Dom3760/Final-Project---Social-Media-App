@@ -18,6 +18,8 @@ struct signInPage: View {
     @Binding var accountIn: String
     @State var accounts:[Users]
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationView
         {
@@ -75,6 +77,7 @@ struct signInPage: View {
                 alertMessage = "Sign in successful!"
                 showingAlert = true
                 accountIn = Username
+                presentationMode.wrappedValue.dismiss()
                 signedIn = true
             }
         }

@@ -19,6 +19,8 @@ struct signUpPage: View {
     @State var alert : Bool = false
     @State var alertMessage = ""
     
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         ZStack {
             Rectangle()
@@ -56,12 +58,18 @@ struct signUpPage: View {
                     .frame(width:200)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .cornerRadius(3.0)
-                    .padding()
+                    .padding(.top)
                 Button(action: makeAcc, label: {
                     Text("Make account")
                 })
                 .padding()
+                .background(.blue)
+                .foregroundColor(.white)
+                .border(Color.black)
+                .cornerRadius(10)
+                .padding()
             }
+            .frame(width: 300)
             .background(Color.white)
             .cornerRadius(6.0)
             .border(Color.black)
@@ -81,8 +89,8 @@ struct signUpPage: View {
             accInfo.append(newAcc)
             alertMessage = "account successfully created"
             alert = true
+            presentationMode.wrappedValue.dismiss()
             print(accInfo)
-            
         }
     }
 }

@@ -22,6 +22,13 @@ struct Post: Hashable {
     var body: String
 }
 
+struct postData: Hashable {
+    var username: String
+    var likesCount: Int
+    var comments: [String]
+    var shareCount: Int
+}
+
 struct accInfo{
     var username: String
     var bio: String
@@ -48,6 +55,13 @@ struct ContentView: View {
         Post(username: "Bo4Gamer67", title: "COD!", body: "I love Cod so much. Specifically BO4. The new warzone is bad compared to the old cod games. Do You guys agree?"),
         Post(username: "FoodGoblin", title: "Cheese!", body: "I just found out that there are a bunch of different types of string cheese. For some reason I didnt notice that they have other cheeses than mozzarella. Ashamed, I used to call myself a cheese enthusiast."),
         Post(username: "BlueCheese830", title: "I can eat Blue Cheese anywhere", body: "I can eat blue cheese with anyone, on anything. anywhere. It is the best thing ever, I swear.")
+    ]
+    
+    @State private var postData1: [postData] = [
+        postData(username: "DanielC408", likesCount: 32678, comments: ["bro that is so sick I love his music", "is that the guy from fortnite?!"], shareCount: 16328),
+        postData(username: "Bo4Gamer67", likesCount: 45678, comments: ["I love COD!","I think BO1 is better, but cod in general is amazing"], shareCount: 30786),
+        postData(username: "FoodGoblin", likesCount: 15836, comments: ["in my opinion string cheese is okay lol.", "That is cool I was today years old lol"], shareCount: 5342),
+        postData(username: "BlueCheese830", likesCount: 200, comments: ["I don' really like blue cheese","That's so cool I love it too lol"] , shareCount: 10)
     ]
     
     @State private var accInfo1: [accInfo] = [
@@ -89,8 +103,15 @@ struct ContentView: View {
                         {
                             VStack(spacing:30)
                             {
-                                ForEach(posts, id: \.self) { post in
-                                    postView(post: post, dark: self.dark)
+                                ForEach($posts, id: \.self) { post in
+                                    ForEach($posts, id: \.self) { post in
+                                        if let index = accInfo1.firstIndex(where: { $0.username == post.username.wrappedValue }) {
+                                                    let accInfoForPost = accInfo1[index]
+                                                    // Call your postView here, passing in post, accInfoForPost, and any other necessary parameters
+                                            postView(post: post.wrappedValue, accInfo2: accInfoForPost, accountIn: accountIn, postData: postData1, dark: dark)
+                                                        .background(dark ? Color.black : Color.white)
+                                        }
+                                    }
                                 }
                                 .background(dark ? .black : .white)
                             }
